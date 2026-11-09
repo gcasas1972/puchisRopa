@@ -19,10 +19,11 @@ La tienda queda en `/` y el panel protegido en `/admin`. El panel no permite cre
 1. Importá este repositorio en Vercel.
 2. Conectá una base Neon y un almacén Vercel Blob al proyecto.
 3. Agregá las variables `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH` y `SESSION_SECRET` en las variables de entorno del proyecto. Generá el hash localmente; nunca uses la contraseña sin hash ni la guardes en el repositorio.
-4. Usá `npm run build` como comando de compilación. El build aplica las migraciones incluidas en `drizzle/` antes de compilar Next.js.
-5. Volvé a desplegar tras cambiar variables de entorno.
+4. Antes del primer despliegue, ejecutá `npm run db:migrate` desde un entorno con `DATABASE_URL` configurada para crear las tablas. La migración inicial requiere una base vacía; si las tablas ya existen, conciliá el historial antes de ejecutarla. Para los despliegues siguientes, aplicá las nuevas migraciones con ese mismo comando antes de desplegar.
+5. Dejá `npm run build` como comando de compilación de Vercel. El build compila la aplicación sin necesitar conectividad a la base de datos.
+6. Volvé a desplegar tras cambiar variables de entorno.
 
-Cada despliegue necesita acceso a Neon para aplicar las migraciones. Usá la URL de conexión de Neon con permisos de esquema (no una credencial de solo lectura). La aplicación usa una conexión con soporte transaccional para reservar y devolver stock de forma consistente.
+Usá una URL de conexión de Neon con permisos de esquema (no una credencial de solo lectura) al ejecutar migraciones. La aplicación usa una conexión con soporte transaccional para reservar y devolver stock de forma consistente.
 
 ## Catálogo y pedidos
 
