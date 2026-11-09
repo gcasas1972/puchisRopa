@@ -236,6 +236,16 @@ h1 em, h2 em { color: var(--coral); font-weight: 600; }
 .admin-card-heading .text-link { border: 0; background: none; cursor: pointer; }
 .admin-card label { margin-bottom: 14px; font-size: 10px; }
 .admin-card input[type="file"] { padding: 7px; font-size: 10px; }
+.admin-photo-field { display: grid; gap: 7px; margin-bottom: 14px; }
+.admin-photo-title { font-size: 10px; font-weight: 700; }
+.admin-photo-control { display: flex; align-items: center; gap: 14px; }
+.admin-photo-preview { width: 92px; height: 92px; flex: 0 0 92px; display: grid; place-items: center; overflow: hidden; background: #f5eddd; color: var(--muted); font-size: 9px; }
+.admin-photo-preview img { width: 100%; height: 100%; object-fit: contain; }
+.admin-photo-details { min-width: 0; }
+.admin-photo-details input.sr-only { width: 1px; min-height: 1px; padding: 0; border: 0; }
+.admin-card label.admin-photo-button { display: inline-flex; width: max-content; min-height: 36px; margin: 0 0 5px; padding: 0 12px; cursor: pointer; }
+.admin-photo-details .field-note { overflow-wrap: anywhere; }
+.admin-photo-details input:focus-visible + .admin-photo-button { outline: 2px solid var(--coral); outline-offset: 2px; }
 .admin-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .field-note { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; font-weight: 400; }
 .variant-editor { min-width: 0; margin: 7px 0 15px; padding: 12px; border: 1px solid var(--line); }

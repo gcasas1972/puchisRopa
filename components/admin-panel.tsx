@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import type { CatalogProduct, OrderView } from "@/lib/types";
 
 type VariantInput = { size: string; stock: string };
@@ -61,9 +61,21 @@ export function AdminPanel({ initialProducts, initialOrders, email }: {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<ProductForm>(blankProduct);
   const [photo, setPhoto] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!photo) {
+      setPhotoPreview(null);
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(photo);
+    setPhotoPreview(previewUrl);
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [photo]);
 
   function resetForm() {
     setEditingId(null);
@@ -91,6 +103,20 @@ export function AdminPanel({ initialProducts, initialOrders, email }: {
 
   function selectPhoto(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] ?? null;
+    setError("");
+    setNotice("");
+    if (file && !["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      setPhoto(null);
+      setError("Usá una imagen JPG, PNG o WebP.");
+      event.target.value = "";
+      return;
+    }
+    if (file && (file.size === 0 || file.size > 5 * 1024 * 1024)) {
+      setPhoto(null);
+      setError("La imagen debe pesar menos de 5 MB.");
+      event.target.value = "";
+      return;
+    }
     setPhoto(file);
   }
 
@@ -218,7 +244,22 @@ export function AdminPanel({ initialProducts, initialOrders, email }: {
                   <label>Categoría<input required minLength={2} maxLength={60} placeholder="Abrigos, Enteritos…" value={form.category} onChange={(event) => setForm({ ...form, category: event.target.value })} /></label>
                   <label>Precio (ARS)<input required type="number" min="1" step="1" value={form.price} onChange={(event) => setForm({ ...form, price: event.target.value })} /></label>
                 </div>
-                <label>Foto del producto <span className="field-note">JPG, PNG o WebP · máximo 5 MB</span><input type="file" accept="image/jpeg,image/png,image/webp" onChange={selectPhoto} />{photo && <small className="field-note">Nueva foto: {photo.name}</small>}{!photo && form.imageUrl && <small className="field-note">Se conservará la foto actual si no elegís otra.</small>}</label>
+                <div className="admin-photo-field">
+                  <span className="admin-photo-title">Foto del producto</span>
+                  <div className="admin-photo-control">
+                    <div className="admin-photo-preview">
+                      {photoPreview || form.imageUrl
+                        ? <img src={photoPreview ?? form.imageUrl} alt={form.name ? `Vista previa: ${form.name}` : "Vista previa de la foto"} />
+                        : <span>Sin foto</span>}
+                    </div>
+                    <div className="admin-photo-details">
+                      <input className="sr-only" id="product-photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="product-photo-help" onChange={selectPhoto} />
+                      <label className="admin-photo-button button button--outline" htmlFor="product-photo">{photo ? "Cambiar foto" : form.imageUrl ? "Reemplazar foto" : "Elegir foto"}</label>
+                      <span className="field-note">{photo?.name ?? (form.imageUrl ? "La foto actual se conserva si no elegís otra." : "Seleccioná una foto para el producto.")}</span>
+                      <small className="field-note" id="product-photo-help">JPG, PNG o WebP · máximo 5 MB</small>
+                    </div>
+                  </div>
+                </div>
                 <fieldset className="variant-editor">
                   <legend>Talles y stock</legend>
                   {form.variants.map((variant, index) => (
