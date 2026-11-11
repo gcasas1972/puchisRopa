@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import type { CatalogProduct, OrderView } from "@/lib/types";
 
@@ -215,17 +216,17 @@ export function AdminPanel({ initialProducts, initialOrders, email }: {
   return (
     <main className="admin-page">
       <header className="admin-header">
-        <a className="brand" href="/">
+        <Link className="brand" href="/">
           <img src="/images/logo-pachus.jpeg" alt="" className="brand__logo" />
           <span className="brand__wordmark">Pachus<span>administración</span></span>
-        </a>
+        </Link>
         <div className="admin-header__account"><span>{email}</span><button type="button" className="button button--outline" onClick={logout}>Cerrar sesión</button></div>
       </header>
 
       <section className="admin-content">
         <div className="admin-title">
           <div><div className="eyebrow"><span></span> Tu espacio Pachus</div><h1>Panel de administración</h1><p>Administrá productos, talles, stock y pedidos.</p></div>
-          <a className="text-link" href="/">Volver a la tienda <span aria-hidden="true">↗</span></a>
+          <Link className="text-link" href="/">Volver a la tienda <span aria-hidden="true">↗</span></Link>
         </div>
         <div className="admin-tabs" role="tablist">
           <button type="button" role="tab" aria-selected={activeTab === "products"} className={activeTab === "products" ? "is-active" : ""} onClick={() => setActiveTab("products")}>Productos <span>{products.filter((product) => product.isActive).length}</span></button>
