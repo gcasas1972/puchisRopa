@@ -149,7 +149,6 @@ h1 em, h2 em { color: var(--coral); font-weight: 600; }
 .admin-footer-link:hover { color: #e7bd72; }
 
 .drawer-backdrop { position: fixed; z-index: 10; inset: 0; background: #29190d7a; opacity: 0; transition: opacity .25s ease; }
-.drawer-backdrop:not([hidden]) { display: block; opacity: 1; }
 .cart-drawer { position: fixed; z-index: 11; top: 0; right: 0; bottom: 0; width: min(430px, 100%); padding: 27px 27px 22px; display: flex; flex-direction: column; background: var(--paper); box-shadow: -12px 0 40px #2c1a1020; transform: translateX(105%); transition: transform .28s ease; }
 .cart-drawer.is-open { transform: translateX(0); }
 .drawer-heading { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--line); }

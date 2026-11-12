@@ -26,7 +26,7 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
-    if (!(file instanceof File)) {
+    if (file === null || typeof file === "string") {
       return NextResponse.json({ error: "Elegí una imagen para subir." }, { status: 400 });
     }
     if (!allowedTypes.has(file.type)) {
