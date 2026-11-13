@@ -138,6 +138,13 @@ h1 em, h2 em { color: var(--coral); font-weight: 600; }
 .size-guide { min-height: 320px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 50px; padding-top: 62px; padding-bottom: 62px; }
 .size-guide__copy { max-width: 420px; }
 .size-guide__copy > p { margin-top: 14px; }
+.size-chart-wrap { max-width: 100%; margin-top: 20px; overflow-x: auto; }
+.size-chart { width: 100%; border-collapse: collapse; text-align: left; font-size: 10px; }
+.size-chart caption { padding-bottom: 8px; color: var(--coral); font-size: 9px; font-weight: 700; text-align: left; }
+.size-chart th, .size-chart td { padding: 9px 7px; border-bottom: 1px solid var(--line); }
+.size-chart thead th { color: var(--brown-soft); font-size: 9px; }
+.size-chart tbody th { color: var(--coral); }
+.size-chart-note { margin: 10px 0 0 !important; color: var(--muted) !important; font-size: 9px !important; line-height: 1.6 !important; }
 .size-guide__art { min-height: 200px; position: relative; display: flex; align-items: center; justify-content: center; }
 .size-guide__art::before { content: ""; position: absolute; width: 230px; height: 180px; border-radius: 50%; background: #e4f0e5; }
 .size-guide__art img { position: relative; width: 190px; height: 210px; object-fit: contain; }

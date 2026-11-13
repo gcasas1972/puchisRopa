@@ -254,6 +254,20 @@ export function Storefront({ products }: { products: CatalogProduct[] }) {
             <div className="eyebrow"><span></span> El calce perfecto</div>
             <h2>Un talle cómodo,<br /><em>un paseo feliz.</em></h2>
             <p>Revisá los talles disponibles de cada prenda antes de sumarla a tu bolsita. Para encontrar el calce ideal, medí el lomo y el contorno de pecho de tu compañero.</p>
+            <div className="size-chart-wrap">
+              <table className="size-chart">
+                <caption>Guía orientativa · medidas en centímetros</caption>
+                <thead>
+                  <tr><th scope="col">Talle</th><th scope="col">Largo del lomo</th><th scope="col">Contorno del pecho</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">S</th><td>25–30</td><td>35–40</td></tr>
+                  <tr><th scope="row">M</th><td>30–35</td><td>40–45</td></tr>
+                  <tr><th scope="row">L</th><td>35–40</td><td>45–50</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="size-chart-note">Son medidas de referencia y pueden variar según el modelo. Si está entre dos talles, elegí el más grande.</p>
           </div>
           <div className="size-guide__art"><img src="/images/mascota.webp" alt="" /><span>¡Que nada<br />le quede chico!</span></div>
         </section>
