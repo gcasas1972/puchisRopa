@@ -130,6 +130,10 @@ h1 em, h2 em { color: var(--coral); font-weight: 600; }
 .story__copy { max-width: 420px; }
 .story h2 { margin: 14px 0; }
 .story__copy > p, .size-guide__copy > p { margin-bottom: 19px; color: var(--brown-soft); font-size: 11px; line-height: 1.9; }
+.story__social { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 20px; color: var(--muted); font-size: 10px; }
+.story__social a { padding: 7px 10px; border: 1px solid #e1d3bd; border-radius: 20px; color: var(--brown); font-weight: 700; transition: border-color .2s ease, color .2s ease; }
+.story__social a:hover { border-color: var(--coral); color: var(--coral); }
+.story__social a span { margin-left: 3px; color: var(--coral); }
 
 .size-guide { min-height: 320px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 50px; padding-top: 62px; padding-bottom: 62px; }
 .size-guide__copy { max-width: 420px; }

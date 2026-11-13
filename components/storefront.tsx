@@ -241,6 +241,11 @@ export function Storefront({ products }: { products: CatalogProduct[] }) {
             <h2>Porque ellos<br />también merecen<br /><em>sentirse especiales.</em></h2>
             <p>En Pachus creemos que cada paseo, siesta y día de lluvia puede convertirse en un momento inolvidable. Creamos ropita cómoda para acompañarlos con mucho estilo y más amor.</p>
             <a className="text-link" href="#coleccion">Conocé la colección <span aria-hidden="true">↗</span></a>
+            <div className="story__social">
+              <span>Seguinos en</span>
+              <a href="https://www.instagram.com/pachuspet?obrf=MWFxZzU5OHpvNjhjOQ==" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+              <a href="https://www.facebook.com/share/1CMn8CvCUy/" target="_blank" rel="noopener noreferrer">Facebook <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
         </section>
 

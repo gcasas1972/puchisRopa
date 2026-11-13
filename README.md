@@ -7,7 +7,7 @@ Tienda de ropa para perros creada con Next.js, Neon PostgreSQL y Vercel Blob. El
 1. Usá Node.js 20.19 o superior.
 2. Instalá las dependencias con `npm install`.
 3. Creá una base PostgreSQL en Neon y copiá la URL de conexión al archivo `.env.local` como `DATABASE_URL`.
-4. Configurá `BLOB_READ_WRITE_TOKEN` con el token de un almacenamiento Vercel Blob.
+4. Configurá `BLOB_READ_WRITE_TOKEN` con el token de un almacenamiento Vercel Blob con acceso público. El catálogo carga las imágenes directamente desde sus URLs.
 5. Generá una contraseña de administrador con `npm run hash-password` y guardá el hash que imprime.
 6. Completá `.env.local` con `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH` y un `SESSION_SECRET` aleatorio de al menos 32 caracteres (por ejemplo, `openssl rand -base64 48`). No subas ese archivo al repositorio.
 7. Ejecutá `npm run db:migrate` y luego `npm run dev`.
@@ -17,8 +17,8 @@ La tienda queda en `/` y el panel protegido en `/admin`. El panel no permite cre
 ## Despliegue en Vercel
 
 1. Importá este repositorio en Vercel.
-2. Conectá una base Neon y un almacén Vercel Blob al proyecto.
-3. Agregá las variables `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH` y `SESSION_SECRET` en las variables de entorno del proyecto. Generá el hash localmente; nunca uses la contraseña sin hash ni la guardes en el repositorio.
+2. Conectá una base Neon y un almacén Vercel Blob configurado con acceso público al proyecto. El catálogo carga las imágenes directamente desde sus URLs, por lo que un almacén privado no es compatible.
+3. Configurá `BLOB_READ_WRITE_TOKEN` con el token de ese almacén público y agregá las variables `DATABASE_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH` y `SESSION_SECRET` en las variables de entorno del proyecto. Generá el hash localmente; nunca uses la contraseña sin hash ni la guardes en el repositorio.
 4. Antes del primer despliegue, ejecutá `npm run db:migrate` desde un entorno con `DATABASE_URL` configurada para crear las tablas. La migración inicial requiere una base vacía; si las tablas ya existen, conciliá el historial antes de ejecutarla. Para los despliegues siguientes, aplicá las nuevas migraciones con ese mismo comando antes de desplegar.
 5. Dejá `npm run build` como comando de compilación de Vercel. El build compila la aplicación sin necesitar conectividad a la base de datos.
 6. Volvé a desplegar tras cambiar variables de entorno.
